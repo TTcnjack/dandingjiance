@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extcss %}
+<link rel="stylesheet" href="{% static 'base/css/base_main.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h2 style="color: white;font-size: 2.0rem;">主页</h2>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+
+<!--        <nav class="navbar navbar-default navbar-fixed-bottom">-->
+<!--		  <div class="container">-->
+<!--		    <ul class="nav nav-pills" style="text-align: center;">-->
+<!--		      <li role="presentation" class="active"><a class="zhuye" href="{% url 'danding:home' %}"><img class="icon-caidan" src="{% static 'base/img/home.png' %}" ><br>实时监控</a></li>-->
+<!--			  <li role="presentation"><a href="{% url 'danding:worker' %}"><img class="icon-caidan" src="{% static 'base/img/worker.png' %}" ><br>员工信息</a></li>-->
+<!--		      <li role="presentation"><a href="{% url 'danding:worker' %}"><img class="icon-caidan" src="{% static 'base/img/worker_list.png' %}" ><br>员工列表</a></li>-->
+<!--			  <li role="presentation"><a href="{% url 'danding:arguments' %}"><img class="icon-caidan" src="{% static 'base/img/arguments.png' %}" ><br>参数列表</a></li>-->
+<!--		    </ul>-->
+<!--		  </div>-->
+<!--		</nav>-->
+	<footer>
+		<a href="{% url 'danding:home' %}" class="home">
+			<dl>
+				<dt><span></span></dt>
+				<dd>实时监控</dd>
+			</dl>
+		</a>
+		<a href="{% url 'danding:worker' %}" class="worker">
+			<dl>
+				<dt><span></span></dt>
+				<dd>工人信息</dd>
+			</dl>
+		</a>
+		<a href="{% url 'danding:worker_list' %}" class="worker_list">
+			<dl>
+				<dt><span></span></dt>
+				<dd>员工列表</dd>
+			</dl>
+		</a>
+		<a href="{% url 'danding:arguments' %}" class="arguments">
+			<dl>
+				<dt><span></span></dt>
+				<dd>参数列表</dd>
+			</dl>
+		</a>
+
+	</footer>
+{% endblock %}
