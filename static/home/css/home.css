@@ -1,5 +1,87 @@
-div .main_mess{
-    width: 300px;
-    height: 200px;
-    background-color: pink;
+#box1-div{
+    width: 10rem;
+    height: 2.5rem;
+    background: pink;
+}
+.yyyyy{
+    display: block;
+    width: 100%;
+    height: 28.5%!important;
+    /*background: url(/static/home/img/background.jpg);*/
+    text-align: center;
+}
+.back{
+    background: url(/staticbase/img/background2.jpg )
+}
+
+.top-yyyy{
+    background:white;
+    border: mistyrose 3px solid;
+    border-radius: 20px;
+    float:left;
+    width: 90%;
+    height: 78%;
+    margin: 1rem 1rem;
+    text-align: center;
+    line-height: 3.7rem;
+}
+.div2{
+    background:white;
+    border: mistyrose 1px solid;
+    border-radius: 20px;
+    float:left;
+    width: 39%;
+    height: 78%;
+    padding: 1rem 0 ;
+    margin: 1rem 1rem;
+    text-align: center;
+    line-height:  2.7rem;
+}
+.div3{
+    background:white;
+    border: mistyrose 1px solid;
+    border-radius: 20px;
+    float:left;
+    width: 39%;
+    height: 78%;
+    padding: 1rem 0 ;
+    margin: 1rem 1rem;
+    text-align: center;
+    line-height: 2.7rem;
+
+}
+dl{
+    margin:0;
+}
+dt,dd{
+    display:inline;
+    margin: 3rem 0;
+    padding:0;
+    font-size: 1.1rem;
+    color: black;
+}
+dt {
+    font-weight: bold;
+}
+dt::after { content: ": "; }
+dd::after{ content:"\0A"; white-space:pre; }
+a{
+    text-decoration: none;
+}
+a:link{
+    text-decoration: none;
+}
+a:visited{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+a:active{
+    text-decoration: none;
+}
+a{
+    font-size: 0.1rem;
+    color: white;
+    text-decoration:none
 }

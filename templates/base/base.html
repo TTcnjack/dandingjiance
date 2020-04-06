@@ -26,13 +26,21 @@
             <div class="weui-panel__bd">
                 <div class="weui-media-box weui-media-box_small-appmsg">
                     <div class="weui-cells">
-                        <a class="weui-cell weui-cell_active weui-cell_access weui-cell_example" href="javascript:">
-                            <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width: 20px; height: 20px; margin-right: 16px; display: block;"></div>
-                            <div class="weui-cell__bd weui-cell_primary">
-                                <p>文字标题</p>
-                            </div>
-                            <span class="weui-cell__ft"></span>
-                        </a>
+
+                        <div class="weui-flex" style="height: 2.25rem; text-align: center; line-height: 2.25rem;">
+                            <div><a href="{% url 'danding:home'%}"><div class="placeholder" style="width: 2.25rem; height: 2.25rem; background: url({% static 'base/img/chevron-left.png' %}) no-repeat center center; background-size: 1.25rem 1.25rem"></div></a></div>
+                                <div class="weui-flex__item">
+                                    <div class="placeholder">{% block topheader %}
+                                    {% endblock %}</div>
+                                </div>
+                            <div><a href="#"><div class="placeholder" style="width: 2.25rem; height: 2.25rem; background: url({% static 'base/img/redo-alt.png' %}) no-repeat center center; background-size: 1rem 1rem"></div></a></div>
+                        </div>
+<!--                            <p class="weui-cell weui-cell_active weui-cell_access weui-cell_example">-->
+<!--                        <a class="weui-cell weui-cell_active weui-cell_access weui-cell_example" href="javascript:">-->
+<!--&lt;!&ndash;                            <div class="weui-cell__hd" id="return"><img src="{% static 'base/img/chevron-left.png'%}" alt="" style="width: 20px; height: 20px; margin-right: 16px; display: block;"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="weui-cell__bd weui-cell_primary" id="top-text" style="text-align: center">&ndash;&gt;-->
+<!--                                <p style="margin: 0 0">-->
+<!--                        <span>222</span>-->
 <!--                        <a class="weui-cell weui-cell_active weui-cell_access weui-cell_example" href="javascript:">-->
 <!--                            <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width: 20px; height: 20px; margin-right: 16px; display: block;"></div>-->
 <!--                            <div class="weui-cell__bd weui-cell_primary">-->
@@ -43,13 +51,9 @@
                     </div>
                 </div>
             </div>
-    {% block header %}
-    {% endblock %}
     {% block content %}
     {% endblock %}
-    <style>
-        .iconfont {font-size: 50px}
-    </style>
+
     <footer>
         <div class="weui-tabbar">
             <a href="{% url 'danding:home' %}" class="home">
@@ -64,8 +68,8 @@
                 </div>
             </a>
             <a href="{% url 'danding:worker' %}" class="worker">
-                <div class="weui-tabbar__item weui-bar__item_on">
-                    <img src="{% static 'base/img/worker.png' %}" alt="" class="weui-tabbar__icon">
+                <div class="weui-tabbar__item ">
+                    <img src="{% static 'base/img/worker1.png' %}" alt="" class="weui-tabbar__icon">
                     <p class="weui-tabbar__label">我的产量</p>
                 </div>
             </a>
@@ -75,13 +79,13 @@
                         <img src="{% static 'base/img/worker_list.png' %}" alt="" class="weui-tabbar__icon">
 <!--                        <span class="weui-badge weui-badge_dot" style="position: absolute; top: 0; right: -6px;">0</span>-->
 <!--                    </div>-->
-                    <p class="weui-tabbar__label">工人列表</p>
+                    <p class="weui-tabbar__label">员工产量</p>
                 </div>
             </a>
             <a href="{% url 'danding:arguments' %}" class="arguments">
                 <div class="weui-tabbar__item">
                     <img src="{% static 'base/img/arguments.png' %}" alt="" class="weui-tabbar__icon">
-                    <p class="weui-tabbar__label">参数列表</p>
+                    <p class="weui-tabbar__label">设备参数</p>
                 </div>
             </a>
         </div>
@@ -105,9 +109,9 @@
 <!--			</dl>-->
 <!--		</a>-->
     </footer>
-    <button class="weui-btn weui-btn_primary">智盛</button>
-    <i class="iconfont icon-HOME"></i>
-    <i class="iconfont icon-footer-"></i>
+<!--    <button class="weui-btn weui-btn_primary">智盛</button>-->
+<!--    <i class="iconfont icon-HOME"></i>-->
+<!--    <i class="iconfont icon-footer-"></i>-->
     <script src="{% static 'base/js/jquery-3.4.1.js' %}"></script>
     <script src="{% static 'base/js/base.js' %}"></script>
     <script src="{% static 'base/js/bootstrap.js' %}"></script>

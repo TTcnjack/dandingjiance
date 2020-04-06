@@ -6,18 +6,69 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 {% endblock %}
-{% block content %}
-<div class="main_mess">
-    <dl>
-        <dt>本日运转效率:</dt>
-        <dd>100<span>%</span></dd>
-    </dl>
-    <dl>
-        <dt>本日运转效率:</dt>
-        <dd>100<span>%</span></dd>
-    </dl>
 
-</div>
+
+{% block topheader %}
+实时监控
 {% endblock %}
 
-systemctl set-default graphical.target
+
+{% block content %}
+<!--{{ data }}-->
+<div class="yyyyy">
+    <div class="top-yyyy">
+        <a href="{% url 'danding:running_rate'%}">
+        <dl>
+            <dt>实时运转率</dt>&nbsp;&nbsp;&nbsp;
+            <dd>{{ data.rt_run_rate }}<span>%</span></dd>
+
+
+            <dt>本月运转率</dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <dd>{{ data.month_run_rate}}<span>%</span></dd>
+        </dl>
+        </a>
+    </div>
+</div>
+<div class="yyyyy">
+    <div class="div2">
+        <a href="{% url 'danding:output'%}">
+        <dl>
+            <dt>本班产量</dt>
+            <dd><span>{{ data.shift_rt_weight}}</span>&nbsp;<span>kg</span></dd>
+
+
+
+        </dl>
+        </a>
+    </div>
+    <div class="div3">
+        <a href="{% url 'danding:break_per'%}">
+        <dl>
+            <dt>实时断头率</dt>
+            <dd><span>{{ data.rt_break_rate}}</span>&nbsp;<span>%</span></dd>
+        </dl>
+        </a>
+    </div>
+</div>
+<div class="yyyyy">
+    <div class="div2">
+        <a href="{% url 'danding:weak_twist'%}">
+        <dl>
+            <dt>实时弱捻量</dt>
+            <dd><br><span>{{ data.rt_weak_num}}</span>&nbsp;<span>锭</span></dd>
+        </dl>
+        </a>
+    </div>
+    <div class="div3">
+        <a href="{% url 'danding:empty_ingot'%}">
+            <dl>
+                <dt>实时空锭量</dt>
+                <dd><br>{{ data.rt_empty_num }}&nbsp;<span>锭<span></span></dd>
+            </dl>
+        </a>
+    </div>
+</div>
+{% endblock %}
+{% block extjs %}
+{{block.supper}}
+{% endblock %}}

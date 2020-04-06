@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
 
-</body>
-</html>
+{% load static %}
+
+{% block extcss %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+{% endblock %}
+{% block topheader %}
+员工产量
+{% endblock %}
+
+
+
+
+
+{% block extjs %}
+{{block.supper}}
+{% endblock %}}
