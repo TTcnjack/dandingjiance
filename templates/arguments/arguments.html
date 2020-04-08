@@ -1,10 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
 
-</body>
-</html>
+{% load static %}
+
+{% block extcss %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'home/css/output.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'home/css/output_400.css' %}" />
+{% endblock %}
+{% block topheader %}
+产量详情
+{% endblock %}
+{% block content %}
+<div class="yyyyy">
+<div class="weui-tab">
+    <div class="weui-tab__bd">
+    <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td style="text-align:center;vertical-align:middle;"><strong>机器编号</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>支数</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>品种</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>回潮率</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>锭数</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>前罗拉直径<br>(厘米)</strong></td>
+            </tr>
+        </thead>
+    <tbody>
+    {% for data in datas %}
+    <tr>
+        <td>{{ data.machine_id }}</td>
+        {% if data.thick_count is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.thick_count }}</td>
+        {% endif %}
+
+        <td>{{ data.type }}</td>
+
+        {% if data.wet_rate is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.wet_rate|floatformat:1 }}%</td>
+        {% endif %}
+
+        {% if data.spindle_num is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.spindle_num }}</td>
+        {% endif %}
+
+        {% if data.front_roller_diameter is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.front_roller_diameter|floatformat:1 }}</td>
+        {% endif %}
+
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+
+{% block extjs %}
+{{block.supper}}
+{% endblock %}}

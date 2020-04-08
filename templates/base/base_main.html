@@ -1,54 +1,71 @@
-{% extends 'base/base.html' %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>
+        智盛智慧工厂
+    </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap-theme.css' %}">
 
-{% block extcss %}
-<link rel="stylesheet" href="{% static 'base/css/base_main.css' %}">
-{% endblock %}
+    {% block extcss %}
+    {% endblock %}
 
-{% block header %}
-    <h2 style="color: white;font-size: 2.0rem;">主页</h2>
-{% endblock %}
+</head>
+<body>
+    <el-container>
+        <el-header>Header</el-header>
+        <el-main>Main</el-main>
+        <el-footer>Footer</el-footer>
+    </el-container>
 
-{% block content %}
-{% endblock %}
 
-{% block footer %}
+    {% block content %}
+    {% endblock %}
 
-<!--        <nav class="navbar navbar-default navbar-fixed-bottom">-->
-<!--		  <div class="container">-->
-<!--		    <ul class="nav nav-pills" style="text-align: center;">-->
-<!--		      <li role="presentation" class="active"><a class="zhuye" href="{% url 'danding:home' %}"><img class="icon-caidan" src="{% static 'base/img/home.png' %}" ><br>实时监控</a></li>-->
-<!--			  <li role="presentation"><a href="{% url 'danding:worker' %}"><img class="icon-caidan" src="{% static 'base/img/worker.png' %}" ><br>员工信息</a></li>-->
-<!--		      <li role="presentation"><a href="{% url 'danding:worker' %}"><img class="icon-caidan" src="{% static 'base/img/worker_list.png' %}" ><br>员工列表</a></li>-->
-<!--			  <li role="presentation"><a href="{% url 'danding:arguments' %}"><img class="icon-caidan" src="{% static 'base/img/arguments.png' %}" ><br>参数列表</a></li>-->
-<!--		    </ul>-->
-<!--		  </div>-->
-<!--		</nav>-->
-	<footer>
-		<a href="{% url 'danding:home' %}" class="home">
-			<dl>
-				<dt><span></span></dt>
-				<dd>实时监控</dd>
-			</dl>
-		</a>
-		<a href="{% url 'danding:worker' %}" class="worker">
-			<dl>
-				<dt><span></span></dt>
-				<dd>工人信息</dd>
-			</dl>
-		</a>
-		<a href="{% url 'danding:worker_list' %}" class="worker_list">
-			<dl>
-				<dt><span></span></dt>
-				<dd>员工列表</dd>
-			</dl>
-		</a>
-		<a href="{% url 'danding:arguments' %}" class="arguments">
-			<dl>
-				<dt><span></span></dt>
-				<dd>参数列表</dd>
-			</dl>
-		</a>
+    <Footer>Footer</Footer>
 
-	</footer>
-{% endblock %}
+
+<!--    <button class="weui-btn weui-btn_primary">智盛</button>-->
+<!--    <i class="iconfont icon-HOME"></i>-->
+<!--    <i class="iconfont icon-footer-"></i>-->
+
+
+
+</body>
+    <script src="{% static 'base/js/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'base/js/base.js' %}"></script>
+    <script src="{% static 'base/js/bootstrap.js' %}"></script>
+    <script src="{% static 'base/js/npm.js' %}"></script>
+    <script src="https://g.alicdn.com/dingding/dingtalk-jsapi/2.10.3/dingtalk.open.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/dingding/dingtalk-pc-api/2.3.1/index.js"></script>
+    <script>
+        alert("code");
+        //进行钉钉登录操作
+
+        dd.ready(function () {
+            // dd.ready参数为回调函数，在环境准备就绪时触发，jsapi的调用需要保证在该回调函数触发后调用，否则无效。
+            dd.runtime.permission.requestAuthCode({
+                corpId: "dingaa331c200723006a35c2f4657eb6378f",
+                onSuccess: function (result) {
+                    {
+                        var code = result.code;
+                        $.ajax({
+                            url : ''
+                        })
+
+                    }
+                },
+                onFail: function (err) {
+                    alert('出错了，' + err);
+                }
+            });
+        });
+    </script>
+    {% block extjs %}
+    {% endblock %}
+</html>

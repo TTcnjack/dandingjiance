@@ -5,6 +5,7 @@
 {% block extcss %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'home/css/home_400.css' %}" />
 {% endblock %}
 
 
@@ -14,17 +15,29 @@
 
 
 {% block content %}
-<!--{{ data }}-->
+
+
+
+
 <div class="yyyyy">
     <div class="top-yyyy">
         <a href="{% url 'danding:running_rate'%}">
-        <dl>
-            <dt>实时运转率</dt>&nbsp;&nbsp;&nbsp;
-            <dd>{{ data.rt_run_rate }}<span>%</span></dd>
+            <dl class="top-dl">
+                <dt >实时运转率:&nbsp;&nbsp;&nbsp;</dt>
+                {% if data.rt_run_rate is -1 %}
+                    <dd>-</dd>
+                {% else %}
+                    <dd>{{ data.rt_run_rate|floatformat:1 }}&nbsp;<span>%</span></dd>
+                {% endif %}
+            </dl>
+            <dl class="top-dl">
 
-
-            <dt>本月运转率</dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <dd>{{ data.month_run_rate}}<span>%</span></dd>
+                <dt>本月运转率:&nbsp;&nbsp;&nbsp;</dt>
+                {% if data.month_run_rate is -1 %}
+                    <dd>-</dd>
+                {% else %}
+                    <dd>{{ data.month_run_rate|floatformat:1}}&nbsp;<span>%</span></dd>
+                {% endif %}
         </dl>
         </a>
     </div>
@@ -33,19 +46,24 @@
     <div class="div2">
         <a href="{% url 'danding:output'%}">
         <dl>
-            <dt>本班产量</dt>
-            <dd><span>{{ data.shift_rt_weight}}</span>&nbsp;<span>kg</span></dd>
-
-
-
+            <dt>本班产量:</dt><br>
+            {% if data.shift_rt_weight is -1 %}
+                <dd>-</dd>
+            {% else %}
+                <dd><span>{{ data.shift_rt_weight|floatformat:1}}</span>&nbsp;<span>kg</span></dd>
+            {% endif %}
         </dl>
         </a>
     </div>
     <div class="div3">
         <a href="{% url 'danding:break_per'%}">
         <dl>
-            <dt>实时断头率</dt>
-            <dd><span>{{ data.rt_break_rate}}</span>&nbsp;<span>%</span></dd>
+            <dt>实时断头率:</dt><br>
+            {% if data.rt_break_rate is -1 %}
+                <dd>-</dd>
+            {% else %}
+                <dd><span>{{ data.rt_break_rate|floatformat:1}}</span>&nbsp;<span>%</span></dd>
+            {% endif %}
         </dl>
         </a>
     </div>
@@ -54,20 +72,29 @@
     <div class="div2">
         <a href="{% url 'danding:weak_twist'%}">
         <dl>
-            <dt>实时弱捻量</dt>
-            <dd><br><span>{{ data.rt_weak_num}}</span>&nbsp;<span>锭</span></dd>
+            <dt>实时弱捻数:<br></dt>
+            {% if data.rt_weak_num is -1 %}
+                <dd>-</dd>
+            {% else %}
+                <dd><span>{{ data.rt_weak_num}}</span>&nbsp;<span>锭</span></dd>
+            {% endif %}
         </dl>
         </a>
     </div>
     <div class="div3">
         <a href="{% url 'danding:empty_ingot'%}">
             <dl>
-                <dt>实时空锭量</dt>
-                <dd><br>{{ data.rt_empty_num }}&nbsp;<span>锭<span></span></dd>
+                <dt>实时空锭数:<br></dt>
+                {% if data.rt_empty_num is -1 %}
+                    <dd>-</dd>
+                {% else %}
+                    <dd>{{ data.rt_empty_num }}&nbsp;<span>锭</span></dd>
+                {% endif %}
             </dl>
         </a>
     </div>
 </div>
+
 {% endblock %}
 {% block extjs %}
 {{block.supper}}

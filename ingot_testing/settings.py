@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'danding',
+    'loginabout',
 ]
 
 MIDDLEWARE = [
@@ -84,20 +85,20 @@ DATABASES = {
         'PORT': '3306'
     }
 }
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://192.168.1.110:6379",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "CONNECTION_POOL_KWARGS": {"max_connections": 100, "decode_responses": True}
-            # "PASSWORD": "密码",
-        }
-    }
-}
-REDIS_TIMEOUT = 7*24*60*60
-CUBES_REDIS_TIMEOUT = 60*60
-NEVER_REDIS_TIMEOUT = 365*24*60*60
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://192.168.1.160:6379",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             "CONNECTION_POOL_KWARGS": {"max_connections": 100, "decode_responses": True}
+#             # "PASSWORD": "密码",
+#         }
+#     }
+# }
+# REDIS_TIMEOUT = 7*24*60*60
+# CUBES_REDIS_TIMEOUT = 60*60
+# NEVER_REDIS_TIMEOUT = 365*24*60*60
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
