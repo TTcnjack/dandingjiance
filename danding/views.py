@@ -7,6 +7,7 @@ import requests
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 from django_redis import get_redis_connection
+from django.core.cache import cache
 
 from common.redis_pool import Pool
 from common import config
@@ -22,21 +23,25 @@ def hee(request):
 def home(request):
     time_data = time.time()
     conn = redis.Redis(connection_pool=Pool)
-
-    data2 = conn.lrange('all_machine', 0, 1)[0]
-    data1 = json.loads(data2)
+    #
+    # data2 = conn.lrange('all_machine', 0, 1)[0]
+    data2 = conn.lrange('run_rate_page', 0, 1)[0]
+    # data1 = json.loads(data2)
+    # cache.lpush("avbbc", "value")
+    # a = cache.keys('*')
+    print(data2)
     # if data2:
     #     data1 = json.loads(data2[0])
     # else:
-    #     data1 = {
-    #         "create_time": "-",
-    #         "rt_run_rate": "-",
-    #         "month_run_rate": '-',
-    #         "shift_rt_weight": '-',
-    #         "rt_break_rate": '-',
-    #         "rt_weak_num": '-',
-    #         "rt_empty_num": '-',
-    #     }
+    data1 = {
+        "create_time": "-",
+        "rt_run_rate": -1,
+        "month_run_rate": -1,
+        "shift_rt_weight": -1,
+        "rt_break_rate": -1,
+        "rt_weak_num": -1,
+        "rt_empty_num": -1,
+    }
 
     return render(request, 'home/home.html', {'data': data1})
 
@@ -48,7 +53,7 @@ def running_rate(request):
     if running_data:
         datas = json.loads(running_data)
         machine_num = datas.get('num_of_machine')
-        for i in range(config.machine_num):
+        for i in range(machine_num):
             i_num = i+1
             machine_key = 'machine_{}'.format(str(i_num))
             mechine = datas.get(machine_key)
@@ -71,7 +76,7 @@ def running_rate(request):
     #                 "shift_run_rate": "88",
     #                 "month_run_rate": "99"}
     #
-    # data_list = [machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man]
+    # data_list = [machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man]
     return render(request, 'home/running_rate.html', {"datas": data_list})
 
 
@@ -90,7 +95,7 @@ def output(request):
     if weight_data:
         datas = json.loads(weight_data)
         machine_num = datas.get('num_of_machine')
-        for i in range(config.machine_num):
+        for i in range(machine_num):
             i_num = i + 1
             machine_key = 'machine_{}'.format(str(i_num))
             mechine = datas.get(machine_key)
@@ -116,7 +121,7 @@ def break_per(request):
     if break_rate_page:
         datas = json.loads(break_rate_page)
         machine_num = datas.get('num_of_machine')
-        for i in range(config.machine_num):
+        for i in range(machine_num):
             i_num = i + 1
             machine_key = 'machine_{}'.format(str(i_num))
             mechine = datas.get(machine_key)
@@ -139,7 +144,7 @@ def empty_ingot(request):
     if empty_info_page:
         datas = json.loads(empty_info_page)
         machine_num = datas.get('num_of_machine')
-        for i in range(config.machine_num):
+        for i in range(machine_num):
             i_num = i + 1
             machine_key = 'machine_{}'.format(str(i_num))
             mechine = datas.get(machine_key)
@@ -162,7 +167,7 @@ def weak_twist(request):
     if weak_info_page:
         datas = json.loads(weak_info_page)
         machine_num = datas.get('num_of_machine')
-        for i in range(config.machine_num):
+        for i in range(machine_num):
             i_num = i + 1
             machine_key = 'machine_{}'.format(str(i_num))
             mechine = datas.get(machine_key)
@@ -174,11 +179,32 @@ def weak_twist(request):
 
 
 def worker(request):
-    return render(request, 'worker.html')
+    return render(request, 'worker/worker.html')
 
 
 def worker_list(request):
-    return render(request, 'worker_list.html')
+    machine_no_man = {
+        "machine_id": "02",
+        "owner": "jack",
+        "month_cotton": "200",
+        "month_polyester": "100",
+        "month_fiber": "40.5",
+    }
+    # conn = redis.Redis(connection_pool=Pool)
+    # machine_param_page = conn.lrange('machine_param_page', 0, 1)[0]
+    # data_list = []
+    # if machine_param_page:
+    #     datas = json.loads(machine_param_page)
+    #     machine_num = datas.get('num_of_machine')
+    #     for i in range(machine_num):
+    #         i_num = i + 1
+    #         machine_key = 'machine_{}'.format(str(i_num))
+    #         mechine = datas.get(machine_key)
+    #         data_list.append(mechine)
+
+    data_list = [machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man,
+                 machine_no_man, machine_no_man, machine_no_man, machine_no_man]
+    return render(request, 'worker_list/worker_list.html', {"datas": data_list})
 
 
 def arguments(request):
@@ -196,7 +222,7 @@ def arguments(request):
     if machine_param_page:
         datas = json.loads(machine_param_page)
         machine_num = datas.get('num_of_machine')
-        for i in range(config.machine_num):
+        for i in range(machine_num):
             i_num = i + 1
             machine_key = 'machine_{}'.format(str(i_num))
             mechine = datas.get(machine_key)
@@ -215,45 +241,58 @@ def dingding(request):
         alarm_user_list = data2.get('alarm_user_list')
         totle_weak_num = data2.get('total_weak_num')
         # 总弱捻锭数大于0再发送
-        rt_weak_num_list = data2.get('rt_weak_num')
-        today = time.time()
-        timeArray = time.localtime(today)
-        otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
-        text = "---- 弱捻情况报告 ----\n" \
-               "时间：{time} \n" \
-               "总弱捻锭数：{num} \n".format(time=otherStyleTime, num=totle_weak_num)
-        for rt in range(config.machine_num):
-            rtnum = rt + 1
-            num = _to_chinese4(rtnum)
-            ding = rt_weak_num_list[rt]
-            if ding is -1:
-                ding = "- (设备未在线)"
-            ts = "设备{num}弱捻锭数：{ding} \n".format(num=num, ding=ding)
-            text = text + ts
-        print(alarm_user_list)
-        acc = requests.get(url=url)
-        access_token = acc.json().get('access_token')
-        print('this token is %s', access_token)
-        header_dict = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko',
-            "Content-Type": "application/json"
-        }
-        url2 = r'https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2?access_token={}'.format(access_token)
-        print(text)
-        data_post = {
-            "agent_id": agent_id,
-            "userid_list": alarm_user_list,
-            "msg": {
-                "msgtype": "text",
-                "text": {
-                    "content": text
+        if totle_weak_num >= 1:
+            rt_weak_num_list = data2.get('rt_weak_num')
+            today = time.time()
+            timeArray = time.localtime(today)
+            otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
+            text = "---- 弱捻情况报告 ----\n" \
+                   "时间：{time} \n" \
+                   "总弱捻锭数：{num} \n".format(time=otherStyleTime, num=totle_weak_num)
+            for rt in range(config.machine_num):
+                rtnum = rt + 1
+                num = _to_chinese4(rtnum)
+                ding = rt_weak_num_list[rt]
+                if ding is -1:
+                    ding = "- (设备未在线)"
+                ts = "设备{num}弱捻锭数：{ding} \n".format(num=num, ding=ding)
+                text = text + ts
+            print(alarm_user_list)
+            acc = requests.get(url=url)
+            access_token = acc.json().get('access_token')
+            print('this token is %s', access_token)
+            header_dict = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko',
+                "Content-Type": "application/json"
+            }
+            url2 = r'https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2?access_token={}'.format(access_token)
+            print(text)
+            data_post = {
+                "agent_id": agent_id,
+                "userid_list": alarm_user_list,
+                "msg": {
+                    "msgtype": "text",
+                    "text": {
+                        "content": text
+                        }
                     }
                 }
-            }
-        print(access_token)
-        print(url)
-        # pooo = requests.post(url=url2, headers=header_dict, data=json.dumps(data_post))
-        # print(pooo.text)
+            print(access_token)
+            print(url)
+            pooo = requests.post(url=url2, headers=header_dict, data=json.dumps(data_post))
+            # print(pooo.text)        else:
+            pass
 
     return JsonResponse({"msg": "ok!"})
 
+
+def test(request):
+    return render(request, 'test.html')
+
+
+def page_not_found(request, exception):
+
+    context={
+        'error':'404 Error'
+    }
+    return render(request, 'base/error_404.html')

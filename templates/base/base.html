@@ -31,8 +31,8 @@
 
 </head>
 <body>
-<div class="back_div">
-            <div class="weui-panel__bd">
+{#<div class="back_div">#}
+            <div class="weui-panel__bd navbar-fixed-top">
                 <div class="weui-media-box weui-media-box_small-appmsg">
                     <div class="weui-cells">
 
@@ -42,7 +42,7 @@
                                     <div class="placeholder">{% block topheader %}
                                     {% endblock %}</div>
                                 </div>
-                            <div><a href="#"><div class="placeholder" id="reload"></div></a></div>
+                            <div><a class="reload2" href="#"><div class="placeholder" id="reload"></div></a></div>
                         </div>
 <!--                            <p class="weui-cell weui-cell_active weui-cell_access weui-cell_example">-->
 <!--                        <a class="weui-cell weui-cell_active weui-cell_access weui-cell_example" href="javascript:">-->
@@ -60,13 +60,14 @@
                     </div>
                 </div>
             </div>
+    <div class="contents_one">
     {% block content %}
     {% endblock %}
-
+    </div>
     <footer>
         <div class="weui-tabbar">
-            <a href="{% url 'danding:home' %}" class="home">
-                <div class="weui-tabbar__item weui-bar__item_on">
+{#            <a href="{% url 'danding:home' %}" class="home">#}
+                <div class="weui-tabbar__item" id="home">
 
 <!--                    <div style="display: inline-block; position: relative;">-->
                         <img src="{% static 'base/img/home.png' %}" alt="" class="weui-tabbar__icon">
@@ -75,28 +76,28 @@
                     <p class="weui-tabbar__label">实时监控</p>
 
                 </div>
-            </a>
-            <a href="{% url 'danding:worker' %}" class="worker">
-                <div class="weui-tabbar__item ">
-                    <img src="{% static 'base/img/worker.png' %}" alt="" class="weui-tabbar__icon">
+{#            </a>#}
+{#            <a href="{% url 'danding:worker' %}" class="worker weui-bar__item_on">#}
+                <div class="weui-tabbar__item " id="worker">
+                    <img src="{% static 'base/img/worker3.png' %}" alt="" class="weui-tabbar__icon">
                     <p class="weui-tabbar__label">我的产量</p>
                 </div>
-            </a>
-            <a href="{% url 'danding:worker_list' %}" class="worker_list">
-                <div class="weui-tabbar__item">
+{#            </a>#}
+{#            <a href="{% url 'danding:worker_list' %}" class="worker_list">#}
+                <div class="weui-tabbar__item" id="list">
 <!--                    <div style="display: inline-block; position: relative;">-->
-                        <img src="{% static 'base/img/worker_list.png' %}" alt="" class="weui-tabbar__icon">
+                        <img src="{% static 'base/img/worker_list3.png' %}" alt="" class="weui-tabbar__icon">
 <!--                        <span class="weui-badge weui-badge_dot" style="position: absolute; top: 0; right: -6px;">0</span>-->
 <!--                    </div>-->
                     <p class="weui-tabbar__label">员工产量</p>
                 </div>
-            </a>
-            <a href="{% url 'danding:arguments' %}" class="arguments">
-                <div class="weui-tabbar__item">
-                    <img src="{% static 'base/img/arguments.png' %}" alt="" class="weui-tabbar__icon">
+{#            </a>#}
+{#            <a href="{% url 'danding:arguments' %}" class="arguments">#}
+                <div class="weui-tabbar__item" id="arguments">
+                    <img src="{% static 'base/img/arguments3.png' %}" alt="" class="weui-tabbar__icon">
                     <p class="weui-tabbar__label">设备参数</p>
                 </div>
-            </a>
+{#            </a>#}
         </div>
 
 <!--		<a href="{% url 'danding:worker' %}" class="worker">-->
@@ -131,9 +132,51 @@
     <script src="https://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+    <script type="text/javascript">
+        var urlstr = location.href;
+        var urlstatus=false;
+        $(function () {
+            $(".reload2").click(function () {
+                location.reload(true);
+            })
 
+        });
+        $(function () {
+            $("#home").click(function () {
+            $(window).attr('location',"{% url 'danding:home' %}");
+        })
+
+        });
+        $(function () {
+            $("#worker").click(function () {
+                $(window).attr('location',"{% url 'danding:worker' %}");
+            })
+
+        });
+        $(function () {
+            $("#list").click(function () {
+                $(window).attr('location',"{% url 'danding:worker_list' %}");
+            })
+
+        });
+        $(function () {
+            $("#arguments").click(function () {
+                $(window).attr('location',"{% url 'danding:arguments' %}");
+            })
+
+        });
+        $(".weui-tabbar__item").each(function () {
+        if ((urlstr + '/').indexOf($(this).attr('id')) > -1 && $(this).attr('id')!='') {
+        $(this).addClass('weui-bar__item_on');urlstatus = true
+        } else {
+        $(this).removeClass('weui-bar__item_on');
+        }
+        });
+        if (!urlstatus) {$(".weui-tabbar__item").eq(0).addClass('weui-bar__item_on'); }
+
+    </script>
     {% block extjs %}
     {% endblock %}
-    </div>
+{#    </div>#}
 </body>
 </html>

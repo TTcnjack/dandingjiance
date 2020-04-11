@@ -1,0 +1,81 @@
+#top_box {
+    width: 100%;
+    height: 36%;
+    border-radius: 20px;
+    border: none;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+}
+#button_box {
+    width: 100%;
+    height: 64%;
+
+    border: none;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 50% 50%
+}
+
+#top_box div {
+    /*background: white;*/
+
+    background-clip: content-box;
+    padding: 30px 20px 30px 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*text-align: center;*/
+    /*line-height: 1.1rem;*/
+
+}
+#button_box div {
+    /*background: white;*/
+
+    background-clip: content-box;
+    padding: 0 20px 30px 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#top_box_one {
+    background: white;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 1.5fr 1fr;
+}
+
+#button_box_in {
+    background: white;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 100%;
+}
+
+#top_box_one div {
+
+    background-clip: content-box;
+    padding: 10px;
+    border: none;
+}
+
+#button_box_in div {
+
+    background-clip: content-box;
+    padding: 10px;
+    border: none;
+}
+article div span{
+    font-family: "Microsoft YaHei—Local file(9 glyphs)";
+    font-size: 5vw;
+}

@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block extcss %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'home/css/output.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'home/css/output_400.css' %}" />
+{% endblock %}
+{% block topheader %}
+产量详情
+{% endblock %}
+{% block content %}
+<div class="yyyyy">
+<div class="weui-tab">
+    <div class="weui-tab__bd">
+    <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td style="text-align:center;vertical-align:middle;"><strong>机器编号</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>实时负责人</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>当前品种</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>本班产量<br>(千克)</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>本月产量<br>(千克)</strong></td>
+            </tr>
+        </thead>
+    <tbody>
+    {% for data in datas %}
+    <tr>
+        <td>{{ data.machine_id }}</td>
+        <td>{{ data.owner }}</td>
+        <td>{{ data.type }}</td>
+        {% if data.shift_rt_weight is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.shift_rt_weight|floatformat:1 }}</td>
+        {% endif %}
+        {% if data.month_rt_weight is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.month_rt_weight|floatformat:1 }}</td>
+        {% endif %}
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+
+{% block extjs %}
+{{block.supper}}
+{% endblock %}}

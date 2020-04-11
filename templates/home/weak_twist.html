@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block extcss %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'home/css/break_per.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'home/css/break_per_400.css' %}" />
+{% endblock %}
+{% block topheader %}
+弱捻详情
+{% endblock %}
+{% block content %}
+<div class="yyyyy">
+<div class="weui-tab">
+    <div class="weui-tab__bd">
+    <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td style="text-align:center;vertical-align:middle;"><strong>机器编号</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>实时负责人</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>实时弱捻数</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>本月弱捻数</strong></td>
+
+            </tr>
+        </thead>
+    <tbody>
+    {% for data in datas %}
+    <tr>
+        <td>{{ data.machine_id }}</td>
+        <td>{{ data.owner }}</td>
+        {% if data.rt_weak_num is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.rt_weak_num }}</td>
+        {% endif %}
+        {% if data.month_weak_num is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.month_weak_num }}</td>
+        {% endif %}
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+
+
+{% block extjs %}
+{{block.supper}}
+{% endblock %}}

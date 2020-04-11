@@ -4,12 +4,34 @@
 
 {% block extcss %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'worker/css/worker.css' %}">
 {% endblock %}
 {% block topheader %}
 本人产量
 {% endblock %}
-
+{% block content %}
+    <article class="people_top">
+        <div class="out_div">
+            <div class="center-block icon_img"><img src="{% static 'worker/img/icon.png' %}" alt="" class="img-responsive img-thumbnail"></div>
+        </div>
+        <div class="out_div">
+            <article class="people_info">
+                <div>姓名：</div>
+                <div>张三</div>
+                <div>工号：</div>
+                <div>20200410</div>
+                <div>手机号：</div>
+                <div>1008611</div>
+            </article>
+        </div>
+    </article>
+    <article>
+        <div></div>
+    </article>
+    <div></div>
+        <div></div>
+        <div></div>
+{% endblock %}
 
 
 

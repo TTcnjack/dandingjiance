@@ -4,13 +4,71 @@
 
 {% block extcss %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'worker_list/css/worker_list.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'worker_list/css/worker_list_400.css' %}" />
 {% endblock %}
 {% block topheader %}
 员工产量
 {% endblock %}
+{% block content %}
+<div class="yyyyy">
+<div class="weui-tab">
+    <div class="weui-tab__bd">
+    <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td style="text-align:center;vertical-align:middle;"><strong>员工编号</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>员工名字</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>棉花月产量<br>（千克）</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>棉花月产量<br>（千克）</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>棉花月产量<br>（千克）</strong></td>
+            </tr>
+        </thead>
+    <tbody>
+    {% for data in datas %}
+    <tr>
+        <td>{{ data.machine_id }}</td>
+        <td>{{ data.owner }}</td>
+        {% if data.month_cotton is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.month_cotton|floatformat:1 }}</td>
+        {% endif %}
 
 
+
+        {% if data.month_polyester is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.month_polyester|floatformat:1 }}</td>
+        {% endif %}
+
+        {% if data.month_fiber is -1 %}
+            <td>-</td>
+        {% else %}
+            <td>{{ data.month_fiber|floatformat:1 }}</td>
+        {% endif %}
+
+{#        {% if data.front_roller_diameter is -1 %}#}
+{#            <td>-</td>#}
+{#        {% else %}#}
+{#            <td>{{ data.front_roller_diameter|floatformat:1 }}</td>#}
+{#        {% endif %}#}
+
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
 
 
 
