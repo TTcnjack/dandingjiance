@@ -173,6 +173,12 @@
         }
         });
         if (!urlstatus) {$(".weui-tabbar__item").eq(0).addClass('weui-bar__item_on'); }
+        alert(sessionStorage.sys_level);
+        if (sessionStorage.sys_level == 0){
+
+            document.getElementById('arguments').style.display = "none";
+            document.getElementById('list').style.display = "none";
+        }
 
     </script>
     {% block extjs %}

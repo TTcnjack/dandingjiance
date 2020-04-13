@@ -55,17 +55,34 @@ unpkg.com/react@16.7.0/umd/react.production.min.js
                 onSuccess: function (result) {
                     {
                         var code = result.code;
+
+
+                        {#var obj = { code: code };#}
+                        {#var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象#}
+                        {#httpRequest.open('POST', '{% url 'loginabout:login'%}', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */#}
+                        {#httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）var obj = { name: 'zhansgan', age: 18 };#}
+                        {#httpRequest.send(JSON.stringify(obj));#}
+
+                        {#$.post('/', JSON.stringify(obj));#}
+
+
+
+
+
                         $.ajax({
                             url : '{% url 'loginabout:login'%}',
                             type : "POST",
                             contentType: "application/json",
                             dataType: "json",
+                            xhrFields: {withCredentials: true},
                             data:JSON.stringify({
                                 "code" : code
                             }),
                             success:function (data) {
-                                alert("登录中");
-                                location.href = {% url 'danding:home'%};
+                                sessionStorage.token = data.data;
+                                sessionStorage.sys_level = data.sys_level;
+                                alert(data.sys_level);
+                                location.href = "home/"
 
                             },
                             error:function (e) {

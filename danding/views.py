@@ -11,7 +11,7 @@ from django.core.cache import cache
 
 from common.redis_pool import Pool
 from common import config
-from common.func import find_one_down, find_down, _to_chinese4
+from common.func import find_one_down, find_down, _to_chinese4, auth
 
 # Create your views here.
 
@@ -21,34 +21,38 @@ def hee(request):
 
 
 def home(request):
+    username_redis = request.session.get("userid")
+    print('session is is %s', username_redis)
     time_data = time.time()
     conn = redis.Redis(connection_pool=Pool)
     #
-    # data2 = conn.lrange('all_machine', 0, 1)[0]
-    data2 = conn.lrange('run_rate_page', 0, 1)[0]
-    # data1 = json.loads(data2)
+    data2 = conn.lrange('all_machine', 0, 1)[0]
+    # data2 = conn.lrange('run_rate_page', 0, 1)[0]
+    data1 = json.loads(data2)
     # cache.lpush("avbbc", "value")
     # a = cache.keys('*')
-    print(data2)
+    # print(data1)
+    # print(dict(data1))
     # if data2:
     #     data1 = json.loads(data2[0])
     # else:
-    data1 = {
-        "create_time": "-",
-        "rt_run_rate": -1,
-        "month_run_rate": -1,
-        "shift_rt_weight": -1,
-        "rt_break_rate": -1,
-        "rt_weak_num": -1,
-        "rt_empty_num": -1,
-    }
+    # data1 = {
+    #     "create_time": "-",
+    #     "rt_run_rate": 99,
+    #     "month_run_rate": -1,
+    #     "shift_rt_weight": -1,
+    #     "rt_break_rate": -1,
+    #     "rt_weak_num": -1,
+    #     "rt_empty_num": -1,
+    # }
 
     return render(request, 'home/home.html', {'data': data1})
 
-
+@auth
 def running_rate(request):
     conn = redis.Redis(connection_pool=Pool)
     running_data = conn.lrange('run_rate_page', 0, 1)[0]
+    # print(running_data)
     data_list = []
     if running_data:
         datas = json.loads(running_data)
@@ -79,7 +83,7 @@ def running_rate(request):
     # data_list = [machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man]
     return render(request, 'home/running_rate.html', {"datas": data_list})
 
-
+@auth
 def output(request):
     # machine_no_man = {
     #     "machine_id": "02",
@@ -106,7 +110,7 @@ def output(request):
 
     return render(request, 'home/output.html', {"datas": data_list})
 
-
+@auth
 def break_per(request):
     # machine_no_man = {
     #     "machine_id": "02",
@@ -131,7 +135,7 @@ def break_per(request):
 
     return render(request, 'home/break_per.html', {"datas": data_list})
 
-
+@auth
 def empty_ingot(request):
     # machine_no_man = {
     #     "machine_id": "02",
@@ -153,7 +157,7 @@ def empty_ingot(request):
     #              machine_no_man, machine_no_man, machine_no_man, machine_no_man]
     return render(request, 'home/empty_ingot.html', {"datas": data_list})
 
-
+@auth
 def weak_twist(request):
     # machine_no_man = {
     #     "machine_id": "02",
@@ -177,11 +181,11 @@ def weak_twist(request):
     #              machine_no_man, machine_no_man, machine_no_man, machine_no_man]
     return render(request, 'home/weak_twist.html', {"datas": data_list})
 
-
+@auth
 def worker(request):
     return render(request, 'worker/worker.html')
 
-
+@auth
 def worker_list(request):
     machine_no_man = {
         "machine_id": "02",
@@ -206,7 +210,7 @@ def worker_list(request):
                  machine_no_man, machine_no_man, machine_no_man, machine_no_man]
     return render(request, 'worker_list/worker_list.html', {"datas": data_list})
 
-
+@auth
 def arguments(request):
     machine_no_man = {
         "machine_id": "02",

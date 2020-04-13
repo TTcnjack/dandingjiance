@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import datetime
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -96,6 +97,9 @@ CACHES = {
         }
     }
 }
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+SESSION_COOKIE_AGE = 60*10
 REDIS_TIMEOUT = 7*24*60*60
 CUBES_REDIS_TIMEOUT = 60*60
 NEVER_REDIS_TIMEOUT = 365*24*60*60
@@ -141,3 +145,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, r'static\media')
+
+REST_FRAMEWORK = {
+ 'DEFAULT_AUTHENTICATION_CLASSES': (
+ 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+ 'rest_framework.authentication.SessionAuthentication',
+ 'rest_framework.authentication.BasicAuthentication',
+ ),
+}
+JWT_AUTH = {
+ # 指明token的有效期
+ 'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+}

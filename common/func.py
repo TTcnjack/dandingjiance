@@ -4,6 +4,7 @@ import time
 import requests
 from django.conf import settings
 from django.http import JsonResponse
+from django.shortcuts import render, HttpResponse,redirect
 
 
 
@@ -68,3 +69,17 @@ def _to_chinese4(num):
         return result[::-1]
 
 print(type(_to_chinese4(5)))
+
+
+def auth(func):
+    def inner(request, *args, **kwargs):
+        # if not request.session.session_key:
+        #     request.session.create()
+        #     username_redis = request.session.get("userid")
+        #     print('userid is %s', username_redis)
+        if not request.session.get("userid"):
+            username_redis = request.session.get("userid")
+            print('userid is %s',username_redis)
+            return redirect('/')
+        return func(request, *args, **kwargs)
+    return inner
