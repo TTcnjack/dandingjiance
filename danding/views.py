@@ -11,7 +11,8 @@ from django.core.cache import cache
 
 from common.redis_pool import Pool
 from common import config
-from common.func import find_one_down, find_down, _to_chinese4, auth
+from common.func import find_one_down, find_down, _to_chinese4
+from common.jwttoken import auth, auth_token
 
 # Create your views here.
 
@@ -21,8 +22,8 @@ def hee(request):
 
 
 def home(request):
-    username_redis = request.session.get("userid")
-    print('session is is %s', username_redis)
+    # username_redis = request.session.get("userid")
+    # print('session is is %s', username_redis)
     time_data = time.time()
     conn = redis.Redis(connection_pool=Pool)
     #
@@ -48,7 +49,7 @@ def home(request):
 
     return render(request, 'home/home.html', {'data': data1})
 
-@auth
+
 def running_rate(request):
     conn = redis.Redis(connection_pool=Pool)
     running_data = conn.lrange('run_rate_page', 0, 1)[0]
@@ -83,7 +84,7 @@ def running_rate(request):
     # data_list = [machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man,machine_no_man]
     return render(request, 'home/running_rate.html', {"datas": data_list})
 
-@auth
+
 def output(request):
     # machine_no_man = {
     #     "machine_id": "02",
@@ -110,7 +111,7 @@ def output(request):
 
     return render(request, 'home/output.html', {"datas": data_list})
 
-@auth
+
 def break_per(request):
     # machine_no_man = {
     #     "machine_id": "02",
@@ -135,7 +136,7 @@ def break_per(request):
 
     return render(request, 'home/break_per.html', {"datas": data_list})
 
-@auth
+
 def empty_ingot(request):
     # machine_no_man = {
     #     "machine_id": "02",
@@ -157,7 +158,7 @@ def empty_ingot(request):
     #              machine_no_man, machine_no_man, machine_no_man, machine_no_man]
     return render(request, 'home/empty_ingot.html', {"datas": data_list})
 
-@auth
+
 def weak_twist(request):
     # machine_no_man = {
     #     "machine_id": "02",
@@ -183,35 +184,71 @@ def weak_twist(request):
 
 @auth
 def worker(request):
-    return render(request, 'worker/worker.html')
+    token = request.GET.get("token")
+    # print("token2 is %s", token)
+    err, msg, data = auth_token(token)
+    # print(data)
+    machine_no_man = {'name': data.get('name'), "id": data.get('userid')}
+    product_lists = []
+    conn = redis.Redis(connection_pool=Pool)
+    workers_list = conn.lrange('worker_output', 0, 1)[0]
+    if workers_list:
+        datas = json.loads(workers_list)
+        worker_num = datas.get('num_of_worker')
+        product_list = datas.get('product_list')
+        machine_no_man['product_list'] = product_list
+        for i in range(worker_num):
+            i_num = i + 1
+            worker_key = 'worker_{}'.format(str(i_num))
+            mechine = datas.get(worker_key)
+            machine_no_man['ic_card'] = mechine.get('ic_card')
+            if mechine.get('dingding_user_id') == data.get('userid'):
+                for product in product_list:
+                    product_lists.append(mechine.get(product))
+                machine_no_man['product_lists'] = product_lists
+        if "product_lists" not in machine_no_man:
+            for product in product_list:
+                product_lists.append(0)
+            machine_no_man['product_lists'] = product_lists
+    print(machine_no_man)
+    return render(request, 'worker/worker.html', {"datas": machine_no_man})
 
 @auth
 def worker_list(request):
-    machine_no_man = {
-        "machine_id": "02",
-        "owner": "jack",
-        "month_cotton": "200",
-        "month_polyester": "100",
-        "month_fiber": "40.5",
-    }
-    # conn = redis.Redis(connection_pool=Pool)
-    # machine_param_page = conn.lrange('machine_param_page', 0, 1)[0]
-    # data_list = []
-    # if machine_param_page:
-    #     datas = json.loads(machine_param_page)
-    #     machine_num = datas.get('num_of_machine')
-    #     for i in range(machine_num):
-    #         i_num = i + 1
-    #         machine_key = 'machine_{}'.format(str(i_num))
-    #         mechine = datas.get(machine_key)
-    #         data_list.append(mechine)
+    # machine_no_man = {
+    #     "machine_id": "02",
+    #     "owner": "jack",
+    #     "month_cotton": "200",
+    #     "month_polyester": "100",
+    #     "month_fiber": "40.5",
+    # }
+    # data_list = [machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man,
+    #              machine_no_man, machine_no_man, machine_no_man, machine_no_man]
+    conn = redis.Redis(connection_pool=Pool)
+    workers_list = conn.lrange('worker_output', 0, 1)[0]
+    data_list = []
 
-    data_list = [machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man,
-                 machine_no_man, machine_no_man, machine_no_man, machine_no_man]
-    return render(request, 'worker_list/worker_list.html', {"datas": data_list})
+    if workers_list:
+        datas = json.loads(workers_list)
+        worker_num = datas.get('num_of_worker')
+        product_list = datas.get('product_list')
+        for i in range(worker_num):
+            i_num = i + 1
+            worker_key = 'worker_{}'.format(str(i_num))
+            mechine = datas.get(worker_key)
+            product_lists = []
+            for product in product_list:
+                product_lists.append(mechine.get(product))
+            mechine['pro'] = product_lists
+            data_list.append(mechine)
+
+    print(data_list)
+    # return HttpResponse(1)
+    return render(request, 'worker_list/worker_list.html', {"datas": data_list, "product_list": product_list})
 
 @auth
 def arguments(request):
+
     machine_no_man = {
         "machine_id": "02",
         "owner": "jack",
@@ -238,6 +275,7 @@ def arguments(request):
 
 
 def dingding(request):
+    # 跟用户状态无关,每次访问都必须去获取当前的access_token,所以能简写不能省略
     if request.method == "POST":
         url = r"https://oapi.dingtalk.com/gettoken?appkey=ding0qsys3hwvuehgm3y&appsecret=Kj_irB0mNvxffh7zbwSMt-nEyKIG_9AueII0QfEn2G5drg_OO5qxw0cp5cx-KYGz"
         agent_id = 677118324

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import datetime
+
+from common import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -89,11 +91,11 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://192.168.1.197:6379/3",
+        "LOCATION": config.LOCATION,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "CONNECTION_POOL_KWARGS": {"max_connections": 100, "decode_responses": True}
-            # "PASSWORD": "密码",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100, "decode_responses": True},
+            "PASSWORD": config.REDIS_PASSWORD,
         }
     }
 }

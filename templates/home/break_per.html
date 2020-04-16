@@ -21,7 +21,7 @@
                 <td style="text-align:center;vertical-align:middle;"><strong>机器编号</strong></td>
                 <td style="text-align:center;vertical-align:middle;"><strong>实时负责人</strong></td>
                 <td style="text-align:center;vertical-align:middle;"><strong>实时断头率</strong></td>
-                <td style="text-align:center;vertical-align:middle;"><strong>本月断头<br>(千锭时断头)</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>本落纱千锭时断头</strong></td>
 
             </tr>
         </thead>
@@ -35,10 +35,10 @@
         {% else %}
             <td>{{ data.rt_break_rate }}%</td>
         {% endif %}
-        {% if data.month_break_rate is -1 %}
+        {% if data.round_break_num is -1 %}
             <td>-</td>
         {% else %}
-            <td>{{ data.month_break_rate|floatformat:0 }}</td>
+            <td>{{ data.round_break_num|floatformat:0 }}</td>
         {% endif %}
     </tr>
     {% endfor %}

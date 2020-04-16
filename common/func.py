@@ -7,9 +7,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse,redirect
 
 
-
-def render_json(code=0, data=None):
-    return JsonResponse({'code': code, 'data': data})
+def render_json(code=0, msg='null', data=None):
+    return JsonResponse({'code': code, 'msg': msg, 'data': data})
 
 
 def find_one_down(data_dict):
@@ -71,15 +70,15 @@ def _to_chinese4(num):
 print(type(_to_chinese4(5)))
 
 
-def auth(func):
-    def inner(request, *args, **kwargs):
-        # if not request.session.session_key:
-        #     request.session.create()
-        #     username_redis = request.session.get("userid")
-        #     print('userid is %s', username_redis)
-        if not request.session.get("userid"):
-            username_redis = request.session.get("userid")
-            print('userid is %s',username_redis)
-            return redirect('/')
-        return func(request, *args, **kwargs)
-    return inner
+# def auth(func):
+#     def inner(request, *args, **kwargs):
+#         # if not request.session.session_key:
+#         #     request.session.create()
+#         #     username_redis = request.session.get("userid")
+#         #     print('userid is %s', username_redis)
+#         if not request.session.get("userid"):
+#             username_redis = request.session.get("userid")
+#             print('userid is %s',username_redis)
+#             return redirect('/')
+#         return func(request, *args, **kwargs)
+#     return inner

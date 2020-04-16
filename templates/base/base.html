@@ -61,6 +61,7 @@
                 </div>
             </div>
     <div class="contents_one">
+
     {% block content %}
     {% endblock %}
     </div>
@@ -133,8 +134,57 @@
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
     <script type="text/javascript">
+        {#dd.ready(function () {#}
+        {#    // dd.ready参数为回调函数，在环境准备就绪时触发，jsapi的调用需要保证在该回调函数触发后调用，否则无效。#}
+        {#    dd.runtime.permission.requestAuthCode({#}
+        {#        corpId: "dingaa331c200723006a35c2f4657eb6378f",#}
+        {#        onSuccess: function (result) {#}
+        {#            {#}
+        {#                var code = result.code;#}
+        {##}
+        {##}
+                        {#var obj = { code: code };#}
+                        {#var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象#}
+                        {#httpRequest.open('POST', '{% url 'loginabout:login'%}', true); //第二步：打开连接/***发送json格式文件必须设置请求头 ；如下 - */#}
+                        {#httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）var obj = { name: 'zhansgan', age: 18 };#}
+                        {#httpRequest.send(JSON.stringify(obj));#}
+        {##}
+                        {#$.post('/', JSON.stringify(obj));#}
+        {##}
+        {##}
+        {##}
+        {##}
+        {##}
+        {#                $.ajax({#}
+        {#                    url : '{% url 'loginabout:login'%}',#}
+        {#                    type : "POST",#}
+        {#                    contentType: "application/json",#}
+        {#                    dataType: "json",#}
+        {#                    xhrFields: {withCredentials: true},#}
+        {#                    data:JSON.stringify({#}
+        {#                        "code" : code#}
+        {#                    }),#}
+        {#                    success:function (data) {#}
+        {#                        sessionStorage.token = data.data;#}
+        {#                        sessionStorage.sys_level = data.sys_level;#}
+        {#                        location.href = "home/"#}
+        {##}
+        {#                    },#}
+        {#                    error:function (e) {#}
+        {#                        alert("登录失败")#}
+        {#                    }#}
+        {#                })#}
+        {##}
+        {#            }#}
+        {#        },#}
+        {#        onFail: function (err) {#}
+        {#            alert('出错了，' + err);#}
+        {#        }#}
+        {#    });#}
+        {#});#}
         var urlstr = location.href;
         var urlstatus=false;
+        var token = window.sessionStorage.token;
         $(function () {
             $(".reload2").click(function () {
                 location.reload(true);
@@ -149,19 +199,49 @@
         });
         $(function () {
             $("#worker").click(function () {
-                $(window).attr('location',"{% url 'danding:worker' %}");
+                window.location.href = 'http://internal.aiator.com:9001/worker/?token=' + token;
+                {#$(window).attr('location',"{% url 'danding:worker' %}");#}
+
             })
 
         });
         $(function () {
             $("#list").click(function () {
-                $(window).attr('location',"{% url 'danding:worker_list' %}");
+                {#$(window).attr('location',"{% url 'danding:worker_list' %}");#}
+                {#window.location.replace("http://www.jb51.net"+);#}
+                window.location.href = 'http://internal.aiator.com:9001/list/?token=' + token;
+
             })
 
         });
         $(function () {
             $("#arguments").click(function () {
-                $(window).attr('location',"{% url 'danding:arguments' %}");
+                {#$(window).attr('location',"{% url 'danding:arguments' %}");#}
+                {#alert(token);#}
+                window.location.href = 'http://internal.aiator.com:9001/arguments/?token=' + token;
+                {#$.ajax({#}
+                {#            url : '{% url 'danding:arguments'%}',#}
+                {#            type : "GET",#}
+                {#            async:true,#}
+                {#            cache: false,#}
+                {#            contentType: "application/json",#}
+                {#            dataType: "json",#}
+                {#            xhrFields: {withCredentials: true},#}
+                            {#headers:{"Authorization", token},#}
+                {#            beforeSend: function(request) {#}
+                {#                request.setRequestHeader("Authorization", token);#}
+                {#            },#}
+                {#            success:function (data) {#}
+                                {#sessionStorage.token = data.data;#}
+                                {#sessionStorage.sys_level = data.sys_level;#}
+                                {#alert(data.sys_level);#}
+                {#                location.href = '{% url 'danding:arguments'%}'#}
+                {##}
+                {#            },#}
+                {#            error:function (e) {#}
+                {#                alert("登录失败")#}
+                {#            }#}
+                {#        })#}
             })
 
         });
@@ -173,11 +253,19 @@
         }
         });
         if (!urlstatus) {$(".weui-tabbar__item").eq(0).addClass('weui-bar__item_on'); }
-        alert(sessionStorage.sys_level);
-        if (sessionStorage.sys_level == 0){
-
-            document.getElementById('arguments').style.display = "none";
-            document.getElementById('list').style.display = "none";
+        {#alert(sessionStorage.sys_level);#}
+        if (sessionStorage.sys_level > 0){
+            document.getElementById('worker').style.display = "block";
+            document.getElementById('home').style.display = "block";
+            document.getElementById('arguments').style.display = "block";
+            document.getElementById('list').style.display = "block";
+        }else{
+            document.getElementById('worker').style.display = "block";
+            document.getElementById('home').style.display = "block";
+            {#document.getElementById('arguments').style.display = "none";#}
+            {#document.getElementById('list').style.display = "none";#}
+            document.getElementById('arguments').style.display = "block";
+            document.getElementById('list').style.display = "block";
         }
 
     </script>

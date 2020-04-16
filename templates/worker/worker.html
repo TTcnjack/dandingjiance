@@ -5,34 +5,69 @@
 {% block extcss %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'worker/css/worker.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'worker/css/worker.css' %}" />
+
 {% endblock %}
+
+
+
 {% block topheader %}
 本人产量
 {% endblock %}
 {% block content %}
     <article class="people_top">
         <div class="out_div">
-            <div class="center-block icon_img"><img src="{% static 'worker/img/icon.png' %}" alt="" class="img-responsive img-thumbnail"></div>
+            <div class="center-block icon_img"><img src="{% static 'worker/img/work_woman3.png' %}" alt="" class="center-block img-thumbnail" style="background: none; border: none; box-shadow: none"></div>
         </div>
         <div class="out_div">
             <article class="people_info">
                 <div>姓名：</div>
-                <div>张三</div>
-                <div>工号：</div>
-                <div>20200410</div>
-                <div>手机号：</div>
-                <div>1008611</div>
+                <div>{{ datas.name }}</div>
+                <div>钉钉ID：</div>
+                <div>{{ datas.id }}</div>
+                <div>IC卡号：</div>
+                <div>{{ datas.ic_card }}</div>
             </article>
         </div>
     </article>
-    <article>
-        <div></div>
-    </article>
-    <div></div>
-        <div></div>
-        <div></div>
-{% endblock %}
 
+{#    <article id="people_bottom">#}
+            <div>
+                <h2 style="text-align: center">本月产量</h2>
+            </div>
+
+    <div class="weui-tab">
+    <div class="weui-tab__bd">
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered" style="margin: auto">
+        <thead>
+            <tr >
+                {% for product in datas.product_list %}
+                <td style="text-align:center;vertical-align:middle;"><strong>{{ product }}<br>(千克)</strong></td>
+{#                <td style="text-align:center;vertical-align:middle;"><strong>实时负责人</strong></td>#}
+{#                <td style="text-align:center;vertical-align:middle;"><strong>运转状态</strong></td>#}
+{#                <td style="text-align:center;vertical-align:middle;"><strong>本班运转率</strong></td>#}
+{#                <td style="text-align:center;vertical-align:middle;"><strong>本月运转率</strong></td>#}
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+
+    <tr>
+        {% for pro in datas.product_lists %}
+        <td style="text-align: center">{{ pro|floatformat:2 }}</td>
+        {% endfor %}
+    </tr>
+    </tbody>
+    </table>
+</div>
+    </div>
+    </div>
+
+
+{#    </article>#}
+
+{% endblock %}
 
 
 

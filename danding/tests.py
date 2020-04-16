@@ -1,3 +1,8 @@
-from django.test import TestCase
+# from django.test import TestCase
+#
+# # Create your tests here.
+kkk ={
+    'sss':2
 
-# Create your tests here.
+}
+print("sssss" not in kkk)

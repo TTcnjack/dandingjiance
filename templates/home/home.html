@@ -20,7 +20,7 @@
     <div id="rt_run_rate">
         <article id="top_box_one">
             <div><span>实时运转率：</span></div>
-            <div><span>
+            <div><span id="datasss">
                 {% if data.rt_run_rate is -1 %}
                     -
                 {% else %}
@@ -28,7 +28,7 @@
                 {% endif %}
             </span></div>
             <div><span>本月运转率：</span></div>
-            <div><span>
+            <div><span id="datasss">
                 {% if data.month_run_rate is -1 %}
                     -
                 {% else %}
@@ -173,5 +173,27 @@
 {% block extjs %}
     {{block.supper}}
     <script src="{% static 'home/js/home.js' %}"></script>
+    <script type="text/javascript">
+    {#$(document).ready(function () {#}
+    {#    function refresh(){#}
+    {#        $.ajax({#}
+    {#        url:{% url 'loginabout:home_ajax' %},#}
+    {#        type: 'GET',#}
+    {#        success: function (data) {#}
+                {#var datas = {{ data|safe }}#}
+    {#            alert(data.data);#}
+    {#            alert(data);#}
+                {#setSceneTd(datas)#}
+    {#            $('#datasss').html(data);#}
+    {#        },#}
+    {#        error: function (datas) {#}
+    {#            alert('err')#}
+    {#        }#}
+    {#    })#}
+    {#    }#}
+    {#    setInterval(refresh, 5000)#}
+    {##}
+    {#})#}
 
+    </script>
 {% endblock %}}

@@ -9,3 +9,15 @@ corpId="dingaa331c200723006a35c2f4657eb6378f"
 
 secret_key = "zhishengzhihuigongchang"
 salt = "aiator"
+
+
+# REDIS_HOST = '192.168.1.196'
+# REDIS_PORT = 6379
+
+REDIS_HOST = 'test.aiator.com'
+REDIS_PORT = 9003
+REDIS_DB = 0
+REDIS_PASSWORD = 'aiator_zhisheng'
+LOCATION = "redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}".format(REDIS_HOST=REDIS_HOST,
+                                                                 REDIS_PORT=REDIS_PORT,
+                                                                 REDIS_DB=REDIS_DB)

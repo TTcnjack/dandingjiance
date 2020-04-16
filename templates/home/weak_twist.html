@@ -21,7 +21,7 @@
                 <td style="text-align:center;vertical-align:middle;"><strong>机器编号</strong></td>
                 <td style="text-align:center;vertical-align:middle;"><strong>实时负责人</strong></td>
                 <td style="text-align:center;vertical-align:middle;"><strong>实时弱捻数</strong></td>
-                <td style="text-align:center;vertical-align:middle;"><strong>本月弱捻数</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>本落纱弱捻数</strong></td>
 
             </tr>
         </thead>
@@ -35,10 +35,10 @@
         {% else %}
             <td>{{ data.rt_weak_num }}</td>
         {% endif %}
-        {% if data.month_weak_num is -1 %}
+        {% if data.round_weak_num is -1 %}
             <td>-</td>
         {% else %}
-            <td>{{ data.month_weak_num }}</td>
+            <td>{{ data.round_weak_num }}</td>
         {% endif %}
 
     </tr>

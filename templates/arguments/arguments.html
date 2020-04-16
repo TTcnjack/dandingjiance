@@ -23,7 +23,7 @@
                 <td style="text-align:center;vertical-align:middle;"><strong>品种</strong></td>
                 <td style="text-align:center;vertical-align:middle;"><strong>回潮率</strong></td>
                 <td style="text-align:center;vertical-align:middle;"><strong>锭数</strong></td>
-                <td style="text-align:center;vertical-align:middle;"><strong>前罗拉直径<br>(厘米)</strong></td>
+                <td style="text-align:center;vertical-align:middle;"><strong>前罗拉直径<br>(毫米)</strong></td>
             </tr>
         </thead>
     <tbody>
@@ -53,7 +53,7 @@
         {% if data.front_roller_diameter is -1 %}
             <td>-</td>
         {% else %}
-            <td>{{ data.front_roller_diameter|floatformat:1 }}</td>
+            <td>{{ data.front_roller_diameter|floatformat }}</td>
         {% endif %}
 
 

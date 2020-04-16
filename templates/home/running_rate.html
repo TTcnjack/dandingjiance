@@ -38,6 +38,10 @@
             <td>{{ data.shift_run_rate|floatformat:2 }}%</td>
             <td>{{ data.month_run_rate|floatformat:2 }}%</td>
         {% elif data.status is 1 %}
+            <td><img src="{% static 'home/img/green.png'%}" alt=""></td>
+            <td>{{ data.shift_run_rate|floatformat:2 }}%</td>
+            <td>{{ data.month_run_rate|floatformat:2 }}%</td>
+        {% elif data.status is 2 %}
             <td><img src="{% static 'home/img/red.png'%}" alt=""></td>
             <td>{{ data.shift_run_rate|floatformat:2 }}%</td>
             <td>{{ data.month_run_rate|floatformat:2 }}%</td>
