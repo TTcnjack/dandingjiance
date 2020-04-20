@@ -16,20 +16,20 @@
     /*color: yellow;*/
     /*text-align: center;*/
 }
-table td{
 
-    text-align:center;/** 设置水平方向居中 */
-    vertical-align:middle;/** 设置垂直方向居中 */
-
-}
-body .yyyyy tr td{
-    height: 1.5rem;
-    text-align:center;/** 设置水平方向居中 */
-    vertical-align:middle;/** 设置垂直方向居中 */
-}
-.yyyyy  .weui-tab .weui-tab__bd .table-responsive thead tr{
+.weui-tab .weui-tab__bd .table-responsive thead tr{
     font-size: 0.2rem;
-    height: 1rem;
+    height: 1.5rem;
     text-align:center;
     vertical-align:middle;
+}
+.weui-tab .weui-tab__bd .table-responsive table tbody tr td{
+    font-size: 0.5rem;
+    height: 1.2rem;
+    text-align:center;
+    vertical-align:middle;
+}
+.weui-tab .weui-tab__bd .table-responsive table tbody tr td img{
+    width: 0.5rem;
+    height: 0.5rem;
 }

@@ -5,7 +5,7 @@
 {% block extcss %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'worker/css/worker.css' %}">
-    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'worker/css/worker.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'worker/css/worker_400.css' %}" />
 
 {% endblock %}
 
@@ -15,25 +15,26 @@
 本人产量
 {% endblock %}
 {% block content %}
+
     <article class="people_top">
-        <div class="out_div">
-            <div class="center-block icon_img"><img src="{% static 'worker/img/work_woman3.png' %}" alt="" class="center-block img-thumbnail" style="background: none; border: none; box-shadow: none"></div>
+        <div class="out_div" id="worker_icon" style="padding: 4vh 0">
+            <div class="center-block icon_img"><img src="{% static 'worker/img/work_woman3.png' %}" alt="" class="center-block img-thumbnail" style="width: auto; background: none; border: none; box-shadow: none"></div>
         </div>
         <div class="out_div">
             <article class="people_info">
                 <div>姓名：</div>
-                <div>{{ datas.name }}</div>
+                <div><span>{{ datas.name }}</span></div>
                 <div>钉钉ID：</div>
-                <div>{{ datas.id }}</div>
+                <div><span>{{ datas.id }}</span></div>
                 <div>IC卡号：</div>
-                <div>{{ datas.ic_card }}</div>
+                <div><span>{{ datas.ic_card }}</span></div>
             </article>
         </div>
     </article>
 
 {#    <article id="people_bottom">#}
             <div>
-                <h2 style="text-align: center">本月产量</h2>
+                <h3 style="text-align: center">本月产量</h3>
             </div>
 
     <div class="weui-tab">

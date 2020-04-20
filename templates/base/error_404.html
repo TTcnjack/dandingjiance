@@ -1,26 +1,25 @@
-{% load staticfiles %}
+{% extends 'base/base.html' %}
 
-<head>
-    <link href="{% static "web/css/style.css" %}" rel="stylesheet" />
-</head>
+{% load static %}
 
-<body class="app flex-row align-items-center">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="clearfix">
-                    <h1 class="float-left display-3 mr-4">404</h1>
-                    <h4 class="pt-3">Oops! 请求失败.</h4>
-                    <p class="text-muted">请求的页面未找到.</p>
-                </div>
-                <div class="input-prepend input-group">
-                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    <input id="prependedInput" class="form-control" size="16" type="text" placeholder="输入要查找的信息?">
-                    <span class="input-group-btn">
-            <button class="btn btn-info" type="button">Search</button>
-          </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
+{% block extcss %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'worker_list/css/worker_list.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="{% static 'worker_list/css/worker_list_400.css' %}" />
+{% endblock %}
+{% block topheader %}
+本月员工产量
+{% endblock %}
+{% block content %}
+<h1>对不起，您请求的页面不存在，请点击返回主页</h1>
+
+    <a href="{% url 'danding:home' %}">主页</a>
+
+
+{% endblock %}
+
+
+
+{% block extjs %}
+{{block.supper}}
+{% endblock %}}

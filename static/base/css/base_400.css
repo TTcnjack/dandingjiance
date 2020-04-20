@@ -66,7 +66,8 @@ footer dl dd{
 .weui-panel__bd .weui-media-box_small-appmsg .weui-cells .weui-flex div a #return{
     width: 1rem;
     height: 1rem;
-    background: url(/static/base/img/reload1.png) no-repeat center center;
+    /*background: url(/static/base/img/reload1.png) no-repeat center center;*/
+    background: none;
     background-size: 0.5rem 0.5rem;
 }
 /*.back_div .weui-panel__bd .weui-media-box_small-appmsg .weui-cells .weui-flex div a #reload{*/

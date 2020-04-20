@@ -25,11 +25,11 @@ def home(request):
     # username_redis = request.session.get("userid")
     # print('session is is %s', username_redis)
     time_data = time.time()
-    conn = redis.Redis(connection_pool=Pool)
-    #
-    data2 = conn.lrange('all_machine', 0, 1)[0]
-    # data2 = conn.lrange('run_rate_page', 0, 1)[0]
-    data1 = json.loads(data2)
+    # conn = redis.Redis(connection_pool=Pool)
+    # #
+    # data2 = conn.lrange('all_machine', 0, 1)[0]
+    # # data2 = conn.lrange('run_rate_page', 0, 1)[0]
+    # data1 = json.loads(data2)
     # cache.lpush("avbbc", "value")
     # a = cache.keys('*')
     # print(data1)
@@ -37,15 +37,15 @@ def home(request):
     # if data2:
     #     data1 = json.loads(data2[0])
     # else:
-    # data1 = {
-    #     "create_time": "-",
-    #     "rt_run_rate": 99,
-    #     "month_run_rate": -1,
-    #     "shift_rt_weight": -1,
-    #     "rt_break_rate": -1,
-    #     "rt_weak_num": -1,
-    #     "rt_empty_num": -1,
-    # }
+    data1 = {
+        "create_time": "-",
+        "rt_run_rate": 99,
+        "month_run_rate": -1,
+        "shift_rt_weight": -1,
+        "rt_break_rate": -1,
+        "rt_weak_num": -1,
+        "rt_empty_num": -1,
+    }
 
     return render(request, 'home/home.html', {'data': data1})
 
@@ -160,89 +160,85 @@ def empty_ingot(request):
 
 
 def weak_twist(request):
-    # machine_no_man = {
-    #     "machine_id": "02",
-    #     "owner": "jack",
-    #     "rt_weak_num": "2",
-    #     "month_weak_num": "10",
-    # }
-    conn = redis.Redis(connection_pool=Pool)
-    weak_info_page = conn.lrange('weak_info_page', 0, 1)[0]
-    data_list = []
-    if weak_info_page:
-        datas = json.loads(weak_info_page)
-        machine_num = datas.get('num_of_machine')
-        for i in range(machine_num):
-            i_num = i + 1
-            machine_key = 'machine_{}'.format(str(i_num))
-            mechine = datas.get(machine_key)
-            data_list.append(mechine)
+    machine_no_man = {
+        "machine_id": "02",
+        "owner": "jack",
+        "rt_weak_num": "2",
+        "month_weak_num": "10",
+    }
+    # conn = redis.Redis(connection_pool=Pool)
+    # weak_info_page = conn.lrange('weak_info_page', 0, 1)[0]
+    # data_list = []
+    # if weak_info_page:
+    #     datas = json.loads(weak_info_page)
+    #     machine_num = datas.get('num_of_machine')
+    #     for i in range(machine_num):
+    #         i_num = i + 1
+    #         machine_key = 'machine_{}'.format(str(i_num))
+    #         mechine = datas.get(machine_key)
+    #         data_list.append(mechine)
 
-    # data_list = [machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man,
-    #              machine_no_man, machine_no_man, machine_no_man, machine_no_man]
+    data_list = [machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man,
+                 machine_no_man, machine_no_man, machine_no_man, machine_no_man]
     return render(request, 'home/weak_twist.html', {"datas": data_list})
 
-@auth
+# @auth
 def worker(request):
-    token = request.GET.get("token")
-    # print("token2 is %s", token)
-    err, msg, data = auth_token(token)
-    # print(data)
-    machine_no_man = {'name': data.get('name'), "id": data.get('userid')}
-    product_lists = []
-    conn = redis.Redis(connection_pool=Pool)
-    workers_list = conn.lrange('worker_output', 0, 1)[0]
-    if workers_list:
-        datas = json.loads(workers_list)
-        worker_num = datas.get('num_of_worker')
-        product_list = datas.get('product_list')
-        machine_no_man['product_list'] = product_list
-        for i in range(worker_num):
-            i_num = i + 1
-            worker_key = 'worker_{}'.format(str(i_num))
-            mechine = datas.get(worker_key)
-            machine_no_man['ic_card'] = mechine.get('ic_card')
-            if mechine.get('dingding_user_id') == data.get('userid'):
-                for product in product_list:
-                    product_lists.append(mechine.get(product))
-                machine_no_man['product_lists'] = product_lists
-        if "product_lists" not in machine_no_man:
-            for product in product_list:
-                product_lists.append(0)
-            machine_no_man['product_lists'] = product_lists
-    print(machine_no_man)
+    # token = request.GET.get("token")
+    # # print("token2 is %s", token)
+    # err, msg, data = auth_token(token)
+    # # print(data)
+    # machine_no_man = {'name': data.get('name'), "id": data.get('userid')}
+    # product_lists = []
+    # conn = redis.Redis(connection_pool=Pool)
+    # workers_list = conn.lrange('worker_output', 0, 1)[0]
+    # if workers_list:
+    #     datas = json.loads(workers_list)
+    #     worker_num = datas.get('num_of_worker')
+    #     product_list = datas.get('product_list')
+    #     machine_no_man['product_list'] = product_list
+    #     for i in range(worker_num):
+    #         i_num = i + 1
+    #         worker_key = 'worker_{}'.format(str(i_num))
+    #         mechine = datas.get(worker_key)
+    #         machine_no_man['ic_card'] = mechine.get('ic_card')
+    #         if mechine.get('dingding_user_id') == data.get('userid'):
+    #             for product in product_list:
+    #                 product_lists.append(mechine.get(product))
+    #             machine_no_man['product_lists'] = product_lists
+    #     if "product_lists" not in machine_no_man:
+    #         for product in product_list:
+    #             product_lists.append(0)
+    #         machine_no_man['product_lists'] = product_lists
+    # print(machine_no_man)
+    machine_no_man = {'name': '黄伟强', 'id': '305236686539711167', 'product_list': ['纯化纤', '纯棉纱', '涤棉纱', '棉粘纱', '准棉纱'], 'ic_card': '0x45c014df', 'product_lists': [0, 0, 0, 0, 0]}
+
     return render(request, 'worker/worker.html', {"datas": machine_no_man})
 
-@auth
+# @auth
 def worker_list(request):
-    # machine_no_man = {
-    #     "machine_id": "02",
-    #     "owner": "jack",
-    #     "month_cotton": "200",
-    #     "month_polyester": "100",
-    #     "month_fiber": "40.5",
-    # }
-    # data_list = [machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man, machine_no_man,
-    #              machine_no_man, machine_no_man, machine_no_man, machine_no_man]
-    conn = redis.Redis(connection_pool=Pool)
-    workers_list = conn.lrange('worker_output', 0, 1)[0]
-    data_list = []
 
-    if workers_list:
-        datas = json.loads(workers_list)
-        worker_num = datas.get('num_of_worker')
-        product_list = datas.get('product_list')
-        for i in range(worker_num):
-            i_num = i + 1
-            worker_key = 'worker_{}'.format(str(i_num))
-            mechine = datas.get(worker_key)
-            product_lists = []
-            for product in product_list:
-                product_lists.append(mechine.get(product))
-            mechine['pro'] = product_lists
-            data_list.append(mechine)
+    # conn = redis.Redis(connection_pool=Pool)
+    # workers_list = conn.lrange('worker_output', 0, 1)[0]
+    # data_list = []
+    #
+    # if workers_list:
+    #     datas = json.loads(workers_list)
+    #     worker_num = datas.get('num_of_worker')
+    #     product_list = datas.get('product_list')
+    #     for i in range(worker_num):
+    #         i_num = i + 1
+    #         worker_key = 'worker_{}'.format(str(i_num))
+    #         mechine = datas.get(worker_key)
+    #         product_lists = []
+    #         for product in product_list:
+    #             product_lists.append(mechine.get(product))
+    #         mechine['pro'] = product_lists
+    #         data_list.append(mechine)
 
-    print(data_list)
+    # print(data_list)
+    data_list=[{'ic_card': '0x45c014df', 'dingding_user_id': '1934420414803409', 'name': '戴帅', '纯化纤': 0.28, '纯棉纱': 0.0, '涤棉纱': 0.0, '棉粘纱': 0.0, '准棉纱': 0.0, 'pro': [0.28, 0.0, 0.0, 0.0, 0.0]}]
+    product_list = ['纯化纤', '纯棉纱', '涤棉纱', '棉粘纱', '准棉纱']
     # return HttpResponse(1)
     return render(request, 'worker_list/worker_list.html', {"datas": data_list, "product_list": product_list})
 
@@ -337,4 +333,11 @@ def page_not_found(request, exception):
     context={
         'error':'404 Error'
     }
-    return render(request, 'base/error_404.html')
+    return render(request, 'err/error_404.html')
+
+def page_error(request):
+
+    context={
+        'error':'404 Error'
+    }
+    return render(request, 'err/error_404404.html')

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>智盛智慧工厂</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+    {% load static %}
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="{% static 'err/css/style.css' %}" rel='stylesheet' type='text/css'/><!-- style.css -->
+{#<link href="//fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500" rel="stylesheet">#}
+{#<link href="//fonts.googleapis.com/css?family=Playball" rel="stylesheet">#}
+</head>
+<body>
+<div id="particles-js"></div>
+	<div class="main-w3layouts">
+	<h1>404</h1>
+		<div class="main-agile">
+			<h2>Error 404</h2>
+			<p>对不起，页面找不到，请联系管理员解决错误</p>
+		<div class="botton-w3ls"><a href="{% url 'danding:home' %}">返回主页</a></div>
+		</div>
+		<div class="footer-w3l">
+            <p class="agileinfo"> &copy; 2020 智盛智慧工厂 | Design by <a href="http://www.aiator.com">www.aiator.com</a></p>		</div>
+	</div>
+	<script src="{% static 'err/js/particles.js' %}"></script>
+	<script src="{% static 'err/js/app.js' %}"></script>
+</body>
+</html>

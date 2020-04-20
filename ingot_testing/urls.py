@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views import static
+from django.conf.urls import url
+from ingot_testing.settings import STATICFILES_DIRS
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', include(('loginabout.urls', 'loginabout'), namespace='loginabout')),
     path(r'', include(('danding.urls', 'danding'), namespace='danding')),
 
+    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': STATICFILES_DIRS}, name='static')
+
 ]
+handler404 = 'danding.views.page_not_found'
+handler500 = 'danding.views.page_error'

@@ -68,7 +68,7 @@
     <footer>
         <div class="weui-tabbar">
 {#            <a href="{% url 'danding:home' %}" class="home">#}
-                <div class="weui-tabbar__item" id="home">
+                <div class="weui-tabbar__item" id="home" style="display: none">
 
 <!--                    <div style="display: inline-block; position: relative;">-->
                         <img src="{% static 'base/img/home.png' %}" alt="" class="weui-tabbar__icon">
@@ -79,13 +79,13 @@
                 </div>
 {#            </a>#}
 {#            <a href="{% url 'danding:worker' %}" class="worker weui-bar__item_on">#}
-                <div class="weui-tabbar__item " id="worker">
+                <div class="weui-tabbar__item " id="worker" style="display: none">
                     <img src="{% static 'base/img/worker3.png' %}" alt="" class="weui-tabbar__icon">
                     <p class="weui-tabbar__label">我的产量</p>
                 </div>
 {#            </a>#}
 {#            <a href="{% url 'danding:worker_list' %}" class="worker_list">#}
-                <div class="weui-tabbar__item" id="list">
+                <div class="weui-tabbar__item" id="list" style="display: none">
 <!--                    <div style="display: inline-block; position: relative;">-->
                         <img src="{% static 'base/img/worker_list3.png' %}" alt="" class="weui-tabbar__icon">
 <!--                        <span class="weui-badge weui-badge_dot" style="position: absolute; top: 0; right: -6px;">0</span>-->
@@ -94,7 +94,7 @@
                 </div>
 {#            </a>#}
 {#            <a href="{% url 'danding:arguments' %}" class="arguments">#}
-                <div class="weui-tabbar__item" id="arguments">
+                <div class="weui-tabbar__item" id="arguments" style="display: none">
                     <img src="{% static 'base/img/arguments3.png' %}" alt="" class="weui-tabbar__icon">
                     <p class="weui-tabbar__label">设备参数</p>
                 </div>

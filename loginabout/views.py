@@ -63,3 +63,4 @@ def home_ajax(request):
     data1 = json.loads(data2)
 
     return JsonResponse(data1)
+

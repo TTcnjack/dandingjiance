@@ -17,5 +17,5 @@ urlpatterns = [
     path(r'dingding/', views.dingding, name='dingding'),
     path(r'test/', views.test, name='test'),
 ]
-hander404 = views.page_not_found
+
 

@@ -35,7 +35,7 @@
     height: 100%;
 
     border-radius: 20px;
-    font-size: 0.7rem;
+    font-size: 0.4rem;
     display: grid;
     grid-template-rows: 33.3% 33.3% 33.3%;
     grid-template-columns: 28% 72%;
@@ -66,19 +66,17 @@
     grid-template-rows: 20% 80%;
     /*grid-template-columns: 1fr 2fr;*/
 }
-/*.contents_one .people_top .out_div .people_info{*/
-/*    font-size: 0.7rem;*/
-/*}*/
+
 
 .weui-tab .weui-tab__bd .table-responsive thead tr td{
-    font-size: 0.8rem;
-    height: 2.52rem;
+    font-size: 0.4rem;
+    height: 1.2rem;
     text-align:center;
     vertical-align:middle;
 }
 .weui-tab .weui-tab__bd .table-responsive table tbody tr td{
-    font-size: 0.8rem;
-    height: 2.52rem;
+    font-size: 0.5rem;
+    height: 1.2rem;
     text-align:center;
     vertical-align:middle;
 }

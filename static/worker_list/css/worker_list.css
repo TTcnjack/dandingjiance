@@ -31,13 +31,13 @@ table td{
 /*.yyyyy  .weui-tab .weui-tab__bd .table-responsive thead tr{*/
 .weui-tab .weui-tab__bd .table-responsive thead tr{
     font-size: 0.6rem;
-    height: 3rem;
+    height: 2.52rem;
     text-align:center;
     vertical-align:middle;
 }
-body .weui-tab .weui-tab__bd .table-responsive thead tr td{
-    font-size: 0.6rem;
-    height: 3rem;
+body .weui-tab .weui-tab__bd .table-responsive table tbody tr td{
+    font-size: 0.8rem;
+    height: 2.52rem;
     text-align:center;
     vertical-align:middle;
 }
