@@ -9,7 +9,7 @@ djangorestframework-jwt==1.11.0
 idna==2.9
 itsdangerous==1.1.0
 optionaldict==0.1.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 pytz==2019.3
 redis==3.4.1
 requests==2.23.0
